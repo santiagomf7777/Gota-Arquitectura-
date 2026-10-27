@@ -1,0 +1,234 @@
+.finder {
+  min-height: 780px;
+
+  padding: 100px 40px;
+
+  background:
+    radial-gradient(
+      circle at 10% 50%,
+      rgba(184, 145, 70, 0.08),
+      transparent 30%
+    ),
+    #171719;
+
+  color: white;
+}
+
+.finder-header {
+  max-width: 800px;
+  margin: auto;
+
+  text-align: center;
+}
+
+.finder-eyebrow {
+  color: #bd9748;
+
+  font-size: 10px;
+  letter-spacing: 4px;
+  font-weight: 600;
+}
+
+.finder-header h2 {
+  margin-top: 20px;
+
+  font-family: Georgia, serif;
+  font-size: 55px;
+  font-weight: 400;
+}
+
+.finder-header h2 em {
+  color: #bd9748;
+  font-weight: 400;
+}
+
+.finder-header p {
+  max-width: 700px;
+
+  margin: 20px auto;
+
+  color: #aaa;
+
+  line-height: 1.7;
+}
+
+.finder-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 45px auto;
+
+  gap: 0;
+}
+
+.finder-step {
+  width: 34px;
+  height: 34px;
+
+  border: 1px solid #444;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #777;
+
+  font-size: 12px;
+}
+
+.finder-step.active {
+  background: #bd9748;
+  border-color: #bd9748;
+  color: white;
+}
+
+.finder-step.completed {
+  border-color: #bd9748;
+  color: #bd9748;
+}
+
+.finder-step:not(:last-child)::after {
+  content: "";
+
+  display: block;
+
+  width: 50px;
+  height: 1px;
+
+  background: #333;
+
+  margin-left: 84px;
+}
+
+.finder-card {
+  max-width: 850px;
+
+  margin: auto;
+
+  padding: 60px 48px;
+
+  border: 1px solid #38383b;
+
+  background: rgba(35, 35, 37, 0.75);
+
+  text-align: center;
+}
+
+.finder-star {
+  color: #bd9748;
+  font-size: 24px;
+}
+
+.finder-card h3 {
+  margin-top: 20px;
+
+  font-family: Georgia, serif;
+
+  font-size: 27px;
+  font-weight: 400;
+}
+
+.finder-subtitle {
+  margin-top: 10px;
+
+  color: #888;
+
+  font-size: 13px;
+}
+
+.finder-options {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 16px;
+
+  margin-top: 40px;
+}
+
+.finder-options.three {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.finder-option {
+  min-height: 155px;
+
+  padding: 25px 15px;
+
+  background: transparent;
+
+  border: 1px solid #3b3b3d;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.finder-option:hover {
+  border-color: #bd9748;
+
+  background: rgba(189, 151, 72, 0.06);
+
+  transform: translateY(-4px);
+}
+
+.finder-icon {
+  display: block;
+
+  margin-bottom: 20px;
+
+  color: #bd9748;
+
+  font-size: 24px;
+}
+
+.finder-option strong {
+  display: block;
+
+  font-family: Georgia, serif;
+
+  font-size: 17px;
+
+  font-weight: 400;
+}
+
+.finder-option small {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #777;
+
+  line-height: 1.5;
+}
+
+@media (max-width: 800px) {
+
+  .finder {
+    padding: 70px 20px;
+  }
+
+  .finder-header h2 {
+    font-size: 42px;
+  }
+
+  .finder-options,
+  .finder-options.three {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .finder-options,
+  .finder-options.three {
+    grid-template-columns: 1fr;
+  }
+
+}

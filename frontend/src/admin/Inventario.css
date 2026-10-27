@@ -1,0 +1,189 @@
+.inventario-page {
+  color: #1d1d1d;
+}
+
+.inv-eyebrow {
+  color: #a08345;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.inventario-page h1 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  margin: 6px 0 28px;
+}
+
+.inv-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.inv-card {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inv-card-warning {
+  background: #fdf6e8;
+  border-color: #f0e0b8;
+}
+
+.inv-card-danger {
+  background: #fcebeb;
+  border-color: #f2c6c6;
+}
+
+.inv-card-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #999;
+  font-weight: 600;
+}
+
+.inv-card-value {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.inv-card-sub {
+  font-size: 12px;
+  color: #888;
+}
+
+.inv-table-container {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 24px;
+}
+
+.inv-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.inv-table-header h2 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 18px;
+  margin: 0;
+}
+
+.inv-filter-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.inv-filter-buttons button {
+  border: 1px solid #ddd;
+  background: white;
+  color: #777;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  padding: 7px 14px;
+  cursor: pointer;
+}
+
+.inv-filter-buttons button.active {
+  background: #a08345;
+  border-color: #a08345;
+  color: white;
+}
+
+.inv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.inv-table th {
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: #999;
+  padding: 10px 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.inv-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.inv-product-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.inv-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #f3f1ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.inv-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.inv-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.inv-badge-normal {
+  background: #e3f3e6;
+  color: #2f7a3c;
+}
+
+.inv-badge-bajo {
+  background: #fdf1d6;
+  color: #a2760f;
+}
+
+.inv-badge-critico {
+  background: #fde0e0;
+  color: #b23030;
+}
+
+.inv-badge-sin_stock {
+  background: #eee;
+  color: #777;
+}
+
+.inv-empty {
+  text-align: center;
+  color: #999;
+  padding: 20px 0 0;
+}
+
+   .inv-size {
+     color: #999;
+     font-weight: 400;
+     font-size: 12px;
+   }
