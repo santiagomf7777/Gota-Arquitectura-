@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const pool = require("../config/database");
 
-const JWT_SECRET = process.env.JWT_SECRET || "gota_perfumeria_secret_dev";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 async function login(req, res) {
   const { email, password } = req.body;

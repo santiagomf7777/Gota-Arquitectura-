@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = process.env.JWT_SECRET || "gota_perfumeria_secret_dev";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 function verificarToken(req, res, next) {
   const authHeader = req.headers.authorization;

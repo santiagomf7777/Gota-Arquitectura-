@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import "./ProductDetail.css";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
-// Eros.jpg -> Eros1.jpg (la segunda foto, de otro ángulo)
 function rutaSegundaImagen(url) {
   return url.replace(/(\.[a-z0-9]+)$/i, "1$1");
 }
@@ -25,29 +25,26 @@ function ProductDetail() {
   const [agregado, setAgregado] = useState(false);
 
   useEffect(() => {
-    async function loadProduct() {
-      try {
-        const response = await fetch(
-          `http://localhost:3000/api/products/${id}`
-        );
+  async function loadProduct() {
+    try {
+      const response = await fetch(`${API_URL}/products/${id}`);
 
-        if (!response.ok) {
-          throw new Error("Producto no encontrado");
-        }
-
-        const data = await response.json();
-        setProduct(data);
-      } catch (err) {
-        console.error(err);
-        setError("No se pudo cargar el producto.");
-      } finally {
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error("Producto no encontrado");
       }
+
+      const data = await response.json();
+      setProduct(data);
+    } catch (err) {
+      console.error(err);
+      setError("No se pudo cargar el producto.");
+    } finally {
+      setLoading(false);
     }
+  }
 
-    loadProduct();
-  }, [id]);
-
+  loadProduct();
+}, [id]);
   // Solo muestra la segunda foto si el archivo existe
   useEffect(() => {
     if (!product?.imagen_url) return;

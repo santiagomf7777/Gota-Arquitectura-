@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/api/admin/inventario";
+const API_URL = `${import.meta.env.VITE_API_URL || "http://localhost:3000/api"}/admin/inventario`;
 
 export async function getInventoryRequest(token) {
   const response = await fetch(API_URL, {
