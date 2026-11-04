@@ -2,9 +2,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Catalog from "./pages/Catalog";
-import ProductDetail from "./pages/ProductDetail";
+import Checkout from "./pages/CheckOut.jsx";
 import Cart from "./pages/cart";
-import Checkout from "./pages/Checkout";
 import Auth from "./pages/Auth";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import Home from "./pages/Home";
