@@ -1,9 +1,9 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Catalog from "./pages/Catalog";
-import Checkout from "./pages/CheckOut.jsx";
-import Cart from "./pages/cart";
+import ProductDetail from "./pages/ProductDetail";
+import Checkout from "./pages/Checkout";
+import Cart from "./pages/Cart";
 import Auth from "./pages/Auth";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import Home from "./pages/Home";
@@ -18,6 +18,7 @@ import AdminRoute from "./components/AdminRoute";
 import AdminLayout from "./admin/AdminLayout";
 import Dashboard from "./admin/Dashboard";
 import Inventario from "./admin/Inventario";
+
 
 function App() {
   return (

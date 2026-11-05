@@ -356,3 +356,74 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* ---------- Flechas y contador de la galería ---------- */
+
+.pd-image-main {
+  position: relative;
+}
+
+.pd-image-main img {
+  animation: pd-fade 0.35s ease;
+}
+
+@keyframes pd-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.pd-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  padding: 0 0 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid #dedbd4;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1d1d1d;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.pd-arrow:hover {
+  background: #a08345;
+  border-color: #a08345;
+  color: #fff;
+}
+
+.pd-arrow.left {
+  left: 12px;
+}
+
+.pd-arrow.right {
+  right: 12px;
+}
+
+.pd-counter {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  padding: 3px 10px;
+  background: rgba(29, 29, 29, 0.65);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 1px;
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pd-image-main img {
+    animation: none;
+  }
+}

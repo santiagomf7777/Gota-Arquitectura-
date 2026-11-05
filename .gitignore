@@ -14,3 +14,15 @@ coverage/
 
 # Logs
 npm-debug.log*
+
+# Copias/clones del proyecto dentro de la carpeta (no deben subirse)
+/GOTA/
+/Gota-Arquitectura-/
+/Gota11/
+/Gota Perfumeria (1)/
+
+# Dependencias y secretos
+node_modules/
+.env
+
+GOTA base de datos.sql

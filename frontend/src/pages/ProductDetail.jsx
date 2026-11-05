@@ -2,11 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import "./ProductDetail.css";
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
-function rutaSegundaImagen(url) {
-  return url.replace(/(\.[a-z0-9]+)$/i, "1$1");
-}
+// Foto general de los decants: se muestra de última en la galería
+const IMAGEN_DECANTS = "/Images/imagenesPerfumes/ImagenDecants.jpg";
 
 function formatoPrecio(valor) {
   return `$${Number(valor).toLocaleString("es-CO")}`;
@@ -21,47 +19,32 @@ function ProductDetail() {
   const [error, setError] = useState("");
   const [varianteId, setVarianteId] = useState(null);
   const [imagenActiva, setImagenActiva] = useState(0);
-  const [segundaFoto, setSegundaFoto] = useState({ productoId: null, src: null });
+  const [fotosFallidas, setFotosFallidas] = useState([]);
   const [agregado, setAgregado] = useState(false);
 
   useEffect(() => {
-  async function loadProduct() {
-    try {
-      const response = await fetch(`${API_URL}/products/${id}`);
+    async function loadProduct() {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/products/${id}`
+        );
 
-      if (!response.ok) {
-        throw new Error("Producto no encontrado");
+        if (!response.ok) {
+          throw new Error("Producto no encontrado");
+        }
+
+        const data = await response.json();
+        setProduct(data);
+      } catch (err) {
+        console.error(err);
+        setError("No se pudo cargar el producto.");
+      } finally {
+        setLoading(false);
       }
-
-      const data = await response.json();
-      setProduct(data);
-    } catch (err) {
-      console.error(err);
-      setError("No se pudo cargar el producto.");
-    } finally {
-      setLoading(false);
     }
-  }
 
-  loadProduct();
-}, [id]);
-  // Solo muestra la segunda foto si el archivo existe
-  useEffect(() => {
-    if (!product?.imagen_url) return;
-
-    const src = rutaSegundaImagen(product.imagen_url);
-    const img = new Image();
-    let cancelado = false;
-
-    img.onload = () => {
-      if (!cancelado) setSegundaFoto({ productoId: product.id, src });
-    };
-    img.src = src;
-
-    return () => {
-      cancelado = true;
-    };
-  }, [product]);
+    loadProduct();
+  }, [id]);
 
   // Quita el aviso "Agregado" a los 2 segundos
   useEffect(() => {
@@ -79,9 +62,7 @@ function ProductDetail() {
     );
   }
 
- const variantes = (product?.variantes || []).filter(
-  (v) => v.tipo === "FRASCO" || v.stock_actual > 0
-);
+  const variantes = product?.variantes || [];
   const porDefecto = variantes.find((v) => v.stock_actual > 0) || variantes[0];
   const seleccionada =
     variantes.find((v) => v.variante_id === varianteId) || porDefecto;
@@ -95,13 +76,26 @@ function ProductDetail() {
     );
   }
 
-  const imagenes = product.imagen_url
-    ? [
-        product.imagen_url,
-        ...(segundaFoto.productoId === product.id ? [segundaFoto.src] : []),
-      ]
-    : [];
-  const fotoActual = imagenes[imagenActiva] || imagenes[0];
+  const tieneDecants = variantes.some((v) => v.tipo === "DECANT");
+
+  // Galería: frasco -> frasco con caja -> decants
+  const imagenes = [
+    product.imagen_url,
+    product.imagen_caja_url,
+    tieneDecants ? IMAGEN_DECANTS : null,
+  ].filter(
+    (src, i, lista) =>
+      src && lista.indexOf(src) === i && !fotosFallidas.includes(src)
+  );
+
+  const indice = imagenActiva < imagenes.length ? imagenActiva : 0;
+  const fotoActual = imagenes[indice];
+
+  const marcarFallida = (src) =>
+    setFotosFallidas((prev) => (prev.includes(src) ? prev : [...prev, src]));
+
+  const irAFoto = (posicion) =>
+    setImagenActiva((posicion + imagenes.length) % imagenes.length);
 
   const disponible = seleccionada.stock_actual > 0;
   const quedanPocas =
@@ -109,7 +103,6 @@ function ProductDetail() {
     seleccionada.stock_minimo > 0 &&
     seleccionada.stock_actual <= seleccionada.stock_minimo;
   const esDecant = seleccionada.tipo === "DECANT";
-  const hayDecants = variantes.some((v) => v.tipo === "DECANT");
 
   function handleAgregar() {
     if (!disponible) return;
@@ -141,23 +134,54 @@ function ProductDetail() {
           <div className="pd-gallery">
             <div className="pd-image-main">
               {fotoActual ? (
-                <img src={fotoActual} alt={product.nombre} />
+                <img
+                  key={fotoActual}
+                  src={fotoActual}
+                  alt={product.nombre}
+                  onError={() => marcarFallida(fotoActual)}
+                />
               ) : (
                 <div className="pd-placeholder">GOTA</div>
+              )}
+
+              {imagenes.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    className="pd-arrow left"
+                    onClick={() => irAFoto(indice - 1)}
+                    aria-label="Foto anterior"
+                  >
+                    ‹
+                  </button>
+
+                  <button
+                    type="button"
+                    className="pd-arrow right"
+                    onClick={() => irAFoto(indice + 1)}
+                    aria-label="Foto siguiente"
+                  >
+                    ›
+                  </button>
+
+                  <span className="pd-counter">
+                    {indice + 1} / {imagenes.length}
+                  </span>
+                </>
               )}
             </div>
 
             {imagenes.length > 1 && (
               <div className="pd-thumbs">
-                {imagenes.map((src, index) => (
+                {imagenes.map((src, i) => (
                   <button
                     key={src}
                     type="button"
-                    className={index === imagenActiva ? "active" : ""}
-                    onClick={() => setImagenActiva(index)}
-                    aria-label={`Ver foto ${index + 1}`}
+                    className={i === indice ? "active" : ""}
+                    onClick={() => setImagenActiva(i)}
+                    aria-label={`Ver foto ${i + 1}`}
                   >
-                    <img src={src} alt="" />
+                    <img src={src} alt="" onError={() => marcarFallida(src)} />
                   </button>
                 ))}
               </div>
@@ -245,27 +269,16 @@ function ProductDetail() {
               )}
             </div>
 
-            {hayDecants && (
-  <aside className="pd-decant-info">
-    <strong>Descubre tu próximo aroma favorito</strong>
-    <p>
-      ¿Te encanta un perfume, pero aún no sabes cómo se
-      sentirá en tu piel? Empieza con un decant y vive la
-      experiencia antes de elegir el frasco completo.
-    </p>
-    <p>
-      Prueba su aroma, descubre cómo evoluciona durante
-      el día y llévalo contigo a cualquier lugar. Elige
-      el tamaño que mejor se adapte a ti.
-    </p>
-    <p>
-      <strong>
-        Tu próxima fragancia favorita puede empezar con
-        unos pocos mililitros.
-      </strong>
-    </p>
-  </aside>
-)}
+            {tieneDecants && (
+              <aside className="pd-decant-info">
+                <strong>¿Qué es un decant?</strong>
+                <p>
+                  Es una porción de este mismo perfume en un frasco pequeño con
+                  atomizador: ideal para probarlo antes de comprar el frasco
+                  completo, o para llevarlo de viaje.
+                </p>
+              </aside>
+            )}
 
             <dl className="pd-details">
               <div>

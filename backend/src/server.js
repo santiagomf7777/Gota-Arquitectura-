@@ -1,6 +1,10 @@
+
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const pool = require("./config/database");
+
 const productRoutes = require("./routes/productRoutes");
 const authRoutes = require("./routes/authRoutes");
 const orderRoutes = require("./routes/orderRoutes");
@@ -9,7 +13,14 @@ const chatRoutes = require("./routes/chatRoutes");
 
 const app = express();
 
-app.use(cors());
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(",").map(origin => origin.trim())
+  : ["http://localhost:5173"];
+
+app.use(cors({
+  origin: allowedOrigins
+}));
+
 app.use(express.json());
 
 app.use("/api/products", productRoutes);
@@ -27,23 +38,22 @@ app.get("/", (req, res) => {
 app.get("/api/test-db", async (req, res) => {
   try {
     const [rows] = await pool.query("SELECT 1 AS conectado");
+
     res.json({
       mensaje: "Conexión con MySQL exitosa",
       resultado: rows
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error conectando con MySQL:", error.message);
+
     res.status(500).json({
-      mensaje: "Error conectando con MySQL",
-      error: error.message
+      mensaje: "Error conectando con MySQL"
     });
   }
 });
 
-require("dotenv").config();
-
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Backend ejecutándose en http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Backend ejecutándose en el puerto ${PORT}`);
 });

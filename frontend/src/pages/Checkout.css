@@ -239,3 +239,13 @@
   background: white;
 }
 }
+
+.product-image {
+  background: #fff;
+}
+
+.product-image img {
+  object-fit: contain;
+  padding: 12px;
+  box-sizing: border-box;
+}
