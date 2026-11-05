@@ -5,6 +5,7 @@ import "./ProductDetail.css";
 
 // Foto general de los decants: se muestra de última en la galería
 const IMAGEN_DECANTS = "/Images/imagenesPerfumes/ImagenDecants.jpg";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 function formatoPrecio(valor) {
   return `$${Number(valor).toLocaleString("es-CO")}`;
@@ -25,9 +26,7 @@ function ProductDetail() {
   useEffect(() => {
     async function loadProduct() {
       try {
-        const response = await fetch(
-          `http://localhost:3000/api/products/${id}`
-        );
+       const response = await fetch(`${API_URL}/products/${id}`);
 
         if (!response.ok) {
           throw new Error("Producto no encontrado");
