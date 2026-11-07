@@ -2,6 +2,10 @@
 require("dotenv").config();
 
 const mysql = require("mysql2/promise");
+const fs = require("fs");
+const path = require("path");
+
+const caPath = path.join(__dirname, "../../aiven-ca.pem");
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST || "localhost",
@@ -11,7 +15,10 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME || "gota_perfumeria",
 
   ssl: process.env.DB_SSL === "true"
-    ? { rejectUnauthorized: true }
+    ? {
+        ca: fs.readFileSync(caPath),
+        rejectUnauthorized: true
+      }
     : undefined,
 
   waitForConnections: true,
@@ -20,3 +27,4 @@ const pool = mysql.createPool({
 });
 
 module.exports = pool;
+
