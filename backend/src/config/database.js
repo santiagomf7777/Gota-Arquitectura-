@@ -1,11 +1,18 @@
-
 require("dotenv").config();
-
 const mysql = require("mysql2/promise");
-const fs = require("fs");
-const path = require("path");
 
-const caPath = path.join(__dirname, "../../aiven-ca.pem");
+function configuracionSsl() {
+  // Aiven usa un certificado propio: pega su contenido completo en DB_SSL_CA
+  if (process.env.DB_SSL_CA) {
+    return { ca: process.env.DB_SSL_CA.replace(/\\n/g, "\n") };
+  }
+
+  if (process.env.DB_SSL === "true") {
+    return { rejectUnauthorized: true };
+  }
+
+  return undefined;
+}
 
 const pool = mysql.createPool({
   host: process.env.DB_HOST || "localhost",
@@ -13,18 +20,11 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME || "gota_perfumeria",
-
-  ssl: process.env.DB_SSL === "true"
-    ? {
-        ca: fs.readFileSync(caPath),
-        rejectUnauthorized: true
-      }
-    : undefined,
-
+  charset: "utf8mb4",
+  ssl: configuracionSsl(),
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
 });
 
 module.exports = pool;
-
