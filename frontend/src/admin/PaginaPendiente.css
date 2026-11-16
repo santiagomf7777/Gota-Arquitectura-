@@ -1,0 +1,26 @@
+.pendiente {
+  max-width: 640px;
+}
+
+.pendiente__eyebrow {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #a08345;
+}
+
+.pendiente h1 {
+  margin: 0 0 12px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 34px;
+  color: #1d1d1d;
+}
+
+.pendiente__texto {
+  margin: 0;
+  color: #77736a;
+  line-height: 1.6;
+}

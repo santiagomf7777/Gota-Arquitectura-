@@ -32,7 +32,7 @@
 .finder-header h2 {
   margin-top: 20px;
 
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
   font-size: 55px;
   font-weight: 400;
 }
@@ -125,7 +125,7 @@
 .finder-card h3 {
   margin-top: 20px;
 
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
 
   font-size: 27px;
   font-weight: 400;
@@ -190,7 +190,7 @@
 .finder-option strong {
   display: block;
 
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
 
   font-size: 17px;
 

@@ -1,16 +1,17 @@
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./AdminLayout.css";
 
-const menuItems = [
-  { to: "/admin", label: "Dashboard", end: true },
-  { to: "/admin/productos", label: "Productos" },
-  { to: "/admin/inventario", label: "Inventario" },
-  { to: "/admin/pedidos", label: "Pedidos" },
-  { to: "/admin/clientes", label: "Clientes" },
-  { to: "/admin/proveedores", label: "Proveedores" },
-  { to: "/admin/reportes", label: "Reportes" },
-  { to: "/admin/configuracion", label: "Configuración" },
+const NAV = [
+  { to: "/admin", etiqueta: "Dashboard", end: true },
+  { to: "/admin/promociones", etiqueta: "Promociones" },
+  { to: "/admin/productos", etiqueta: "Productos" },
+  { to: "/admin/inventario", etiqueta: "Inventario" },
+  { to: "/admin/pedidos", etiqueta: "Pedidos" },
+  { to: "/admin/clientes", etiqueta: "Clientes" },
+  { to: "/admin/proveedores", etiqueta: "Proveedores" },
+  { to: "/admin/reportes", etiqueta: "Reportes" },
+  { to: "/admin/configuracion", etiqueta: "Configuración" },
 ];
 
 function AdminLayout() {
@@ -31,7 +32,7 @@ function AdminLayout() {
         </div>
 
         <nav className="admin-nav">
-          {menuItems.map((item) => (
+          {NAV.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
@@ -40,7 +41,7 @@ function AdminLayout() {
                 isActive ? "admin-nav-link active" : "admin-nav-link"
               }
             >
-              {item.label}
+              {item.etiqueta}
             </NavLink>
           ))}
         </nav>
@@ -60,6 +61,11 @@ function AdminLayout() {
       </aside>
 
       <main className="admin-content">
+        <div className="admin-topbar">
+          <Link to="/" className="admin-topbar-volver">
+            ← Volver a la tienda
+          </Link>
+        </div>
         <Outlet />
       </main>
     </div>

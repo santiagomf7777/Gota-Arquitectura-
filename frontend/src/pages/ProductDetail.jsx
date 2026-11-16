@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { API_URL } from "../config/api";
 import "./ProductDetail.css";
 
 // Foto general de los decants: se muestra de última en la galería
 const IMAGEN_DECANTS = "/Images/imagenesPerfumes/ImagenDecants.jpg";
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 function formatoPrecio(valor) {
   return `$${Number(valor).toLocaleString("es-CO")}`;
@@ -26,7 +26,7 @@ function ProductDetail() {
   useEffect(() => {
     async function loadProduct() {
       try {
-       const response = await fetch(`${API_URL}/products/${id}`);
+        const response = await fetch(`${API_URL}/products/${id}`);
 
         if (!response.ok) {
           throw new Error("Producto no encontrado");
@@ -100,8 +100,10 @@ function ProductDetail() {
   const quedanPocas =
     disponible &&
     seleccionada.stock_minimo > 0 &&
-    seleccionada.stock_actual <= seleccionada.stock_minimo;
+    seleccionada.stock_actual < seleccionada.stock_minimo;
   const esDecant = seleccionada.tipo === "DECANT";
+  const conPromoSeleccionada =
+    Boolean(seleccionada.promo) && seleccionada.precio_final < seleccionada.precio;
 
   function handleAgregar() {
     if (!disponible) return;
@@ -115,7 +117,9 @@ function ProductDetail() {
       imagen_url: product.imagen_url,
       tipo: seleccionada.tipo,
       tamano_ml: seleccionada.tamano_ml,
-      precio: seleccionada.precio,
+      precio: seleccionada.precio_final ?? seleccionada.precio,
+      precio_original: seleccionada.precio,
+      promo: conPromoSeleccionada ? seleccionada.promo : null,
       stock_actual: seleccionada.stock_actual,
     });
 
@@ -206,6 +210,8 @@ function ProductDetail() {
                 {variantes.map((v) => {
                   const agotada = v.stock_actual <= 0;
                   const activa = v.variante_id === seleccionada.variante_id;
+                  const conPromo =
+                    Boolean(v.promo) && v.precio_final < v.precio;
 
                   return (
                     <button
@@ -220,9 +226,24 @@ function ProductDetail() {
                         {v.tipo === "DECANT" ? "Decant" : "Frasco"}
                       </span>
                       <span className="pd-option-size">{v.tamano_ml} ml</span>
-                      <span className="pd-option-price">
-                        {agotada ? "Agotado" : formatoPrecio(v.precio)}
-                      </span>
+
+                      {agotada ? (
+                        <span className="pd-option-price">Agotado</span>
+                      ) : (
+                        <>
+                          {conPromo && (
+                            <s className="pd-option-original">
+                              {formatoPrecio(v.precio)}
+                            </s>
+                          )}
+                          <span className="pd-option-price">
+                            {formatoPrecio(v.precio_final ?? v.precio)}
+                          </span>
+                          {conPromo && (
+                            <span className="pd-promo-tag">{v.promo.nombre}</span>
+                          )}
+                        </>
+                      )}
                     </button>
                   );
                 })}
@@ -231,9 +252,19 @@ function ProductDetail() {
 
             <div className="pd-buy">
               <div className="pd-price-row">
-                <span className="pd-price">
-                  {formatoPrecio(seleccionada.precio)}
-                </span>
+                <div className="pd-price-block">
+                  {conPromoSeleccionada && (
+                    <s className="pd-price-original">
+                      {formatoPrecio(seleccionada.precio)}
+                    </s>
+                  )}
+                  <span className="pd-price">
+                    {formatoPrecio(seleccionada.precio_final ?? seleccionada.precio)}
+                  </span>
+                  {conPromoSeleccionada && (
+                    <span className="pd-promo-tag">{seleccionada.promo.nombre}</span>
+                  )}
+                </div>
 
                 <span
                   className={`pd-stock ${

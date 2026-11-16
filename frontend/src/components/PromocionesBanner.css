@@ -1,0 +1,112 @@
+.promos {
+  width: 100%;
+  color: var(--ink);
+  font-family: inherit;
+}
+
+.promos__head {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.promos__eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #a08345;
+}
+
+.promos__head h2,
+.promo-card h3 {
+  font-family: var(--font-display);
+}
+.promos__head::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 2px;
+  margin: 20px auto 0;
+  background: #a08345;
+}
+
+.promos__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.promo-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #eeeae2;
+  padding: 28px 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.promo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.promo-card__badge,
+.promo-card__texto,
+.promo-card__desc,
+.promo-card__link,
+.promo-acciones .promo-add {
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+}
+
+
+.promo-card__desc {
+  margin: 0 0 14px;
+  color: #6c6c6c;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.promo-card__texto {
+  margin: 0 0 18px;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.promo-card__link {
+  margin-top: auto;
+  color: #8c7444;
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.promo-card__link:hover {
+  color: #a08345;
+  text-decoration: underline;
+}
+
+@media (max-width: 550px) {
+  .promos {
+    padding: 40px 20px;
+  }
+}
+
+.promo-card.is-clickable { cursor: pointer; transition: transform 0.15s, box-shadow 0.15s; }
+.promo-card.is-clickable:hover { transform: translateY(-2px); }
+.promo-card.is-active { border-color: #a8894a; box-shadow: 0 0 0 2px #a8894a33; }
+
+.container {
+  max-width: 1480px;
+  margin: 0 auto;
+}
+button,
+input,
+select {
+  font-family: var(--font-body);
+}

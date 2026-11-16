@@ -28,7 +28,7 @@
 }
 
 .auth-card h1 {
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
   font-size: 30px;
   font-weight: 400;
   margin: 0 0 10px;
@@ -119,4 +119,17 @@
 
 .auth-back:hover {
   color: #1d1d1d;
+}
+
+.auth-card input {
+  background: #fff;
+  color: #1d1d1d;
+  border: 1px solid #d9d2c3;
+  padding: 12px 14px;
+}
+.auth-card input::placeholder { color: #8a8478; }
+.auth-card input:focus {
+  outline: none;
+  border-color: #9c7f3f;
+  box-shadow: 0 0 0 3px rgba(156, 127, 63, 0.15);
 }

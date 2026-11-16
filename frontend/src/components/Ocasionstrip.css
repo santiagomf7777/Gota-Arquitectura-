@@ -1,0 +1,102 @@
+.ocasion {
+  --gota-oro: var(--gold, #b8953f);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 24px 56px;
+  text-align: center;
+  color: #e9e6df;
+}
+
+.ocasion__eyebrow {
+  margin: 0 0 14px;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gota-oro);
+}
+
+.ocasion__titulo {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.2;
+  color: #f2efe8;
+}
+
+.ocasion__titulo em {
+  color: var(--gota-oro);
+}
+
+.ocasion__texto {
+  margin: 14px auto 0;
+  max-width: 460px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #9a968c;
+}
+
+.ocasion__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.ocasion__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 26px 14px 24px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ocasion__card:hover {
+  border-color: var(--gota-oro);
+  background: rgba(184, 149, 63, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.ocasion__card:focus-visible {
+  outline: 2px solid var(--gota-oro);
+  outline-offset: 3px;
+}
+
+.ocasion__icono {
+  font-size: 22px;
+  line-height: 1;
+  color: var(--gota-oro);
+  margin-bottom: 6px;
+}
+
+.ocasion__nombre {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: #fff;
+}
+
+.ocasion__detalle {
+  font-size: 12.5px;
+  color: #9a968c;
+}
+
+@media (max-width: 800px) {
+  .ocasion__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 420px) {
+  .ocasion {
+    padding: 48px 16px 40px;
+  }
+}

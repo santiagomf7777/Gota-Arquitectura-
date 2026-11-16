@@ -24,7 +24,7 @@
 
 .admin-brand-title {
   display: block;
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
   font-size: 18px;
   color: white;
 }
@@ -115,4 +115,41 @@
   padding: 32px 40px;
   box-sizing: border-box;
   overflow-x: auto;
+}
+
+/* ---- Añadir al FINAL de AdminLayout.css ---- */
+
+/* Los títulos heredaban el blanco de la tienda: aquí se fija su color */
+.admin-content {
+  color: #1d1d1d;
+}
+
+.admin-content :where(h1, h2, h3, h4) {
+  color: #1d1d1d;
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+.admin-topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.admin-topbar-volver {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #d8cfbd;
+  border-radius: 999px;
+  color: #2a2620;
+  font-size: 0.85rem;
+  text-decoration: none;
+  background: #fff;
+}
+
+.admin-topbar-volver:hover {
+  border-color: #a68a4e;
+  color: #a68a4e;
 }

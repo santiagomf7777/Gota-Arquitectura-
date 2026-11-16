@@ -1,0 +1,40 @@
+.promo-acciones {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.promo-acciones .promo-add {
+  appearance: none;
+  border: 1px solid #1d1d1d;
+  border-radius: 0;
+  background: #1d1d1d;
+  color: #fff;
+  padding: 10px 18px;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.promo-acciones .promo-add:hover {
+  background: #9c7f3f;
+  border-color: #9c7f3f;
+}
+
+.promo-acciones .promo-link {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  text-decoration: none;
+}
+
+.promo-acciones .promo-link:hover {
+  color: #9c7f3f;
+}

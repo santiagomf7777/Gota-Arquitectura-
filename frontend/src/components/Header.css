@@ -218,3 +218,8 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+.site-header {
+  background: var(--black);
+  border-bottom: 1px solid rgba(201, 162, 74, 0.25);
+}

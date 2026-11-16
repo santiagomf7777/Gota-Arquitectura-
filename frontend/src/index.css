@@ -1,104 +1,347 @@
+/* src/index.css */
+
+/* ---------- Variables ---------- */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --gold-100: #f3e7c3;
+  --gold-300: #d9b96a;
+  --gold-500: #c9a24a;
+  --gold-700: #8a6d33;
+  --black: #0b0b0b;
+  --black-soft: #151411;
+  --black-card: #1c1b18;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --cream: #f4eee2;
+  --cream-deep: #e8dcbf;
+  --paper: #fbf8f2;
+  --ink: #1d1b17;
+  --line: #e0d5b8;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Rubik", system-ui, "Segoe UI", Roboto, sans-serif;
 
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 25px -10px rgba(0, 0, 0, 0.18);
+
+  /* Colores de contenido según el fondo de la sección.
+     Los componentes los leen; cada sección los define. */
+  --texto-titulo: var(--ink);
+  --texto-cuerpo: #4a4438;
+  --acento: var(--gold-700);
+
+  color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-}
-
-#root {
-  width: 100%;
-  min-height: 100svh;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
 }
 
 h1,
-h2 {
-  font-family: var(--heading);
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
   font-weight: 500;
-  color: var(--text-h);
+  line-height: 1.15;
+  margin: 0 0 0.5em;
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
+h1 { font-size: clamp(36px, 4.5vw, 56px); letter-spacing: -0.01em; }
+h2 { font-size: clamp(28px, 3.2vw, 40px); }
+h3 { font-size: 20px; }
+
 p {
   margin: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+a {
+  color: var(--acento);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--black);
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 3px;
+}
+
+/* ---------- Texto auxiliar ---------- */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--acento);
+}
+
+.accent {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--acento);
+}
+
+.divider {
+  width: 56px;
+  height: 1px;
+  margin: 16px auto 0;
+  background: var(--gold-500);
+}
+
+/* ---------- Inputs ---------- */
+input,
+select,
+textarea,
+button {
+  font-family: var(--font-body);
+}
+
+input,
+select,
+textarea {
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  padding: 12px 14px;
+  width: 100%;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #8a8478;
+  opacity: 1;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--gold-500);
+  box-shadow: 0 0 0 3px rgba(201, 162, 74, 0.18);
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid var(--black);
+  background: var(--black);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.btn:hover { background: var(--gold-700); border-color: var(--gold-700); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn--ghost:hover {
+  background: transparent;
+  color: var(--gold-700);
+  border-color: var(--gold-700);
+}
+
+.btn--gold {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--black);
+}
+.btn--gold:hover { background: var(--gold-300); border-color: var(--gold-300); }
+
+/* ---------- Superficies ---------- */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Secciones ----------
+   Cada sección define sus variables de contenido.
+   Los componentes solo leen las variables, sin selectores de contexto. */
+.section {
+  padding: clamp(56px, 8vw, 96px) 24px;
+  color: var(--texto-cuerpo);
+  background: var(--paper);
+}
+
+.section--light {
+  --texto-titulo: var(--ink);
+  --texto-cuerpo: #4a4438;
+  --acento: var(--gold-700);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.section--dark {
+  --texto-titulo: #f5ecd2;
+  --texto-cuerpo: #c9bfa6;
+  --acento: var(--gold-300);
+  background: var(--black-soft);
+  color: #ece4cf;
+}
+
+.section--dark .card {
+  background: var(--black-card);
+  border-color: rgba(201, 162, 74, 0.22);
+  color: #e9e1cc;
+}
+
+/* ---------- Marca ---------- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--gold-300);
+  text-decoration: none;
+}
+.brand:hover { color: var(--gold-100); }
+
+.brand__mark {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand__name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.brand__slogan {
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-700);
+}
+
+.brand--light { color: var(--ink); }
+.brand--light .brand__slogan { color: var(--gold-700); }
+
+/* ---------- Header ---------- */
+.site-header {
+  background: var(--black);
+  color: #f5ecd2;
+  border-bottom: 1px solid rgba(201, 162, 74, 0.25);
+}
+
+.site-header a,
+.site-header button {
+  color: inherit;
+}
+
+.site-header a:hover,
+.site-header button:hover {
+  color: var(--gold-300);
+}
+
+/* ---------- Números y precios: siempre Rubik ---------- */
+.hero-price,
+.pd-price,
+.pd-option-size,
+.cart-image-fallback,
+.pd-placeholder,
+.marcas__item,
+.ocasion__nombre,
+.ap-card__value,
+.ap-promo-card__valor,
+.inv-card-value {
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Marcas + pie: un solo bloque oscuro ---------- */
+.marcas-final {
+  background: var(--black);
+  padding: 56px 24px 0;
+  border-top: 1px solid rgba(201, 162, 74, 0.2);
+}
+
+.site-footer {
+  background: var(--black);
+  color: #bfb6a0;
+  border-top: 1px solid rgba(201, 162, 74, 0.12);
+  margin-top: 0;
+}
+
+/* Selección de texto con el dorado de la marca */
+::selection {
+  background: var(--gold-500);
+  color: var(--black);
+}
+
+/* Las dos bandas oscuras se tocan, sin hueco crema */
+.marcas-final {
+  margin-bottom: 0;
+}
+
+.marcas-final + .site-footer,
+.site-footer {
+  margin-top: 0;
+}
+
+/* Quita cualquier margen inferior de la última sección */
+.home > section:last-of-type,
+.home > .marcas-final {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Contenedor de la tienda: sin huecos crema entre secciones y pie */
+.tienda-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--black);
+}
+
+.tienda-shell > main,
+.tienda-shell > .site-footer {
+  margin: 0;
+}
+
+/* Selección de texto: dorado de la marca, sin azul del sistema */
+::selection {
+  background: var(--gold-500);
+  color: var(--black);
 }

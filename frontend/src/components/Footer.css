@@ -1,72 +1,76 @@
 .site-footer {
+  position: relative;
   background: #0c1112;
   border-top: 1px solid #23262a;
-  padding: 50px 40px 30px;
   color: #9a9a9a;
+  font-size: 13px;
+  margin-top: 60px;
 }
 
-.footer-content {
-  max-width: 1100px;
+.site-footer__inner {
+  max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 30px;
-  text-align: left;
+  padding: 48px 4% 32px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.2fr;
+  gap: 40px;
 }
 
-.footer-logo {
-  font-family: Georgia, serif;
-  font-size: 20px;
+.site-footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.site-footer__col h4 {
+  margin: 0 0 4px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #c09a4d;
+  font-weight: 600;
+}
+
+.site-footer__brand {
+  font-family: var(--font-display);
+  font-size: 18px;
   color: #fff;
 }
 
-.footer-logo em {
-  color: #c09a4d;
-}
-
-.footer-brand p {
-  margin: 10px 0 0;
-  max-width: 320px;
-  font-size: 13px;
+.site-footer__texto {
+  margin: 0;
   line-height: 1.6;
-  color: #8a8a8a;
+  color: #7d7d7d;
+  max-width: 340px;
 }
 
-.footer-links {
-  display: flex;
-  gap: 24px;
-}
-
-.footer-links a {
+.site-footer__col a {
   color: #cfcfcf;
   text-decoration: none;
-  font-size: 13px;
-  letter-spacing: 0.5px;
   transition: color 0.2s ease;
+  width: fit-content;
 }
 
-.footer-links a:hover {
+.site-footer__col a:hover {
   color: #c09a4d;
 }
 
-.footer-copy {
-  max-width: 1100px;
-  margin: 36px auto 0;
-  padding-top: 20px;
-  border-top: 1px solid #1d2023;
-  font-size: 12px;
-  color: #6f6f6f;
-  text-align: left;
+.site-footer__ciudad {
+  color: #7d7d7d;
 }
 
-@media (max-width: 600px) {
-  .site-footer {
-    padding: 40px 20px 24px;
-  }
+.site-footer__bottom {
+  border-top: 1px solid #1d2022;
+  padding: 16px 4%;
+  text-align: center;
+  font-size: 12px;
+  color: #6f6f6f;
+}
 
-  .footer-content {
-    flex-direction: column;
+@media (max-width: 800px) {
+  .site-footer__inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 36px 6% 24px;
   }
 }

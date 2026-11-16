@@ -1,0 +1,40 @@
+/* src/components/MarcasStrip.css */
+.marcas {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+  text-align: center;
+}
+
+.marcas__titulo {
+  margin: 0 0 18px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-300);
+}
+
+.marcas__lista {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 26px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.marcas__item {
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #d9d2bd;
+  white-space: nowrap;
+}
+
+.marcas__item:hover {
+  color: var(--gold-300);
+}
