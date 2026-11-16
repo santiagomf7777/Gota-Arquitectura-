@@ -8,3 +8,6 @@ respaldo-*.json
 body.json
 pqrs.json
 *.log
+*.sql
+respaldo*
+
