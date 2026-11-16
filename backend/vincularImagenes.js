@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 // Vincula las fotos de public/Images/imagenesPerfumes con cada perfume.
 //
 //   node vincularImagenes.js            -> solo muestra qué haría (no cambia nada)
@@ -26,7 +28,9 @@ const IGNORAR = ["imagendecants"];
 // Para perfumes cuyo nombre en la base de datos no se parece al del archivo.
 //   "Nombre del perfume en la BD": "NombreBaseDelArchivo" (sin el 1 ni la extensión)
 const ALIAS = {
-  "Caramelo Yara": "YaraCandy",
+  "Bade'e Al Oud - Oud for Glory": "BadeeAlOudForGlory",
+  // Quita las // de la siguiente línea si AsadYara.jpg es el Asad original:
+  // "Asad": "AsadYara",
 };
 
 function normalizar(texto) {
@@ -91,7 +95,12 @@ function buscarBase(nombreProducto, porNombre, bases) {
     .filter((b) => b.length >= 5 && n.length >= 4 && (n.includes(b) || b.includes(n)))
     .sort((a, b) => b.length - a.length);
 
-  if (candidatas.length > 0) {
+  // Si el nombre del perfume es solo un pedazo de varios archivos
+  // (ej. "Asad" con AsadBourbon, AsadElixir...), es ambiguo: no adivinar.
+  const ambiguo =
+    candidatas.length > 1 && candidatas.every((b) => b.includes(n));
+
+  if (candidatas.length > 0 && !ambiguo) {
     return { base: candidatas[0], tipo: "aproximada", otras: candidatas.slice(1) };
   }
 
@@ -111,6 +120,7 @@ async function main() {
 
   console.log(`Carpeta: ${CARPETA}`);
   console.log(`Imágenes encontradas: ${porNombre.size}`);
+  console.log("Base de datos:", process.env.DB_HOST, "/", process.env.DB_NAME);
   console.log(aplicar ? "Modo: APLICAR cambios\n" : "Modo: solo vista previa (no se guarda nada)\n");
 
   const [productos] = await pool.query(

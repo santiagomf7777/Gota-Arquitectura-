@@ -1,0 +1,10 @@
+node_modules
+.env
+.env.*
+!.env.example
+
+data/
+respaldo-*.json
+body.json
+pqrs.json
+*.log
